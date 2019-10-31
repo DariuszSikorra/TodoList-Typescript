@@ -1,5 +1,4 @@
-import React, { useReducer } from "react";
-// import { useEffect, useRef} from 'react';
+import React, { useReducer, useEffect, useRef } from "react";
 import { initialState } from "./initials/initials";
 import { reducer } from "./reducers/reducers";
 import { Todo } from "./types/types";
@@ -8,30 +7,22 @@ import "./App.css";
 const App: React.FC = () => {
   const [AppState, dispatch] = useReducer(reducer, initialState);
 
-  // const didRun = useRef(false);
 
-  // useEffect(() => {
-  //   if (!didRun.current) {
-  //     const raw = localStorage.getItem("data");
-  //     if (raw) {
-  //       dispatch({ type: "RESET", payload: JSON.parse(raw) });
-  //       didRun.current = true;
-  //     }
-  //   }
-  // });
+  const didRun = useRef(false);
 
-  // useEffect(() => {
-  //   localStorage.setItem("data", JSON.stringify(AppState));
-  // }, [AppState]);
+  useEffect(() => {
+    if (!didRun.current) {
+      const raw = localStorage.getItem("data");
+      if (raw) {
+        dispatch({ type: "RESET", payload: JSON.parse(raw) });
+        didRun.current = true;
+      }
+    }
+  });
 
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    dispatch({
-      type: "ADD_TODO",
-      payload: AppState.todoForm
-    });
-  };
+  useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(AppState));
+  }, [AppState]);
 
   const makeDoneTodo = (item: Todo) => {
     dispatch({ type: "MAKEDONE_TODO", payload: item });
@@ -39,6 +30,14 @@ const App: React.FC = () => {
 
   const deleteTodo = (item: Todo) => {
     dispatch({ type: "DELETE_TODO", payload: item });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch({
+      type: "ADD_TODO",
+      payload: AppState.todoForm
+    });
   };
 
   return (
@@ -89,7 +88,7 @@ const App: React.FC = () => {
           />
         </div>
         <button type="submit">Dodaj</button>
-      </form>
+      </form>{" "}
       <br />
       <p>Lista zadań do zrobienia:</p>
       <ul>

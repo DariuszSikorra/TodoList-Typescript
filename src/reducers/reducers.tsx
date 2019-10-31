@@ -4,10 +4,7 @@ import { today, initialTodoForm } from "../initials/initials";
 export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case "RESET":
-      return {
-        ...state,
-        todoForm: action.payload
-      };
+      return action.payload
     case "ADD_DISCRIPTION":
       return {
         ...state,

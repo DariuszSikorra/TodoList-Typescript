@@ -13,7 +13,7 @@ export type AppState = {
 };
 
 export type Action =
-    | { type: "RESET"; payload: Todo }
+    | { type: "RESET"; payload: AppState }
     | { type: "ADD_DISCRIPTION"; payload: string }
     | { type: "ADD_IMPORTANT"; payload: boolean }
     | { type: "ADD_TODO"; payload: Todo }
