@@ -1,6 +1,10 @@
 ### Todo List Typescript
 
-[TodoList-useHooks](https://github.com/DariuszSikorra/TodoList-useHooks) rewritten into TypeScript.
+[TodoList-useHooks](https://github.com/DariuszSikorra/TodoList-useHooks) App rewritten into TypeScript.
+
+## Check it out!
+
+[TodoList](https://dariuszsikorra.github.io/TodoList-Typescript/)
 
 ## About
 
