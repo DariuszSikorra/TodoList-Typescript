@@ -1,12 +1,14 @@
-import React, { useReducer, useEffect, useRef } from "react";
-import { initialState } from "./initials/initials";
-import { reducer } from "./reducers/reducers";
-import { Todo } from "./types/types";
+import React, { useEffect, useRef } from 'react';
+import { useAppState, useAppDispatch } from "./context/context";
+
+import Form from "./components/Form"
+import TodoList from "./components/TodoList"
+
 import "./App.css";
 
 const App: React.FC = () => {
-  const [AppState, dispatch] = useReducer(reducer, initialState);
-
+  const AppState = useAppState();
+  const dispatch = useAppDispatch();
 
   const didRun = useRef(false);
 
@@ -24,101 +26,14 @@ const App: React.FC = () => {
     localStorage.setItem("data", JSON.stringify(AppState));
   }, [AppState]);
 
-  const makeDoneTodo = (item: Todo) => {
-    dispatch({ type: "MAKEDONE_TODO", payload: item });
-  };
-
-  const deleteTodo = (item: Todo) => {
-    dispatch({ type: "DELETE_TODO", payload: item });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    dispatch({
-      type: "ADD_TODO",
-      payload: AppState.todoForm
-    });
-  };
-
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
-        <h1>Todo-Lista</h1>
-        <div>
-          <span>Dodaj zadanie</span>
-          <br />
-          <span>Podaj opis zadania: </span>
-          <input
-            type="text"
-            placeholder="Discription..."
-            value={AppState.todoForm.discription}
-            required
-            onChange={e =>
-              dispatch({
-                type: "ADD_DISCRIPTION",
-                payload: e.currentTarget.value
-              })
-            }
-          />
-        </div>
-        <div>
-          <span>Podaj deadline: </span>
-          <input
-            type="date"
-            value={AppState.todoForm.deadline}
-            onChange={e =>
-              dispatch({
-                type: "ADD_DEADLINE",
-                payload: e.currentTarget.value
-              })
-            }
-          />
-        </div>
-        <div>
-          <span>Priorytet: </span>
-          <input
-            type="checkbox"
-            checked={AppState.todoForm.important}
-            onChange={e =>
-              dispatch({
-                type: "ADD_IMPORTANT",
-                payload: e.currentTarget.checked
-              })
-            }
-          />
-        </div>
-        <button type="submit">Dodaj</button>
-      </form>{" "}
-      <br />
-      <p>Lista zadań do zrobienia:</p>
-      <ul>
-        {AppState.todoList
-          .filter((x: Todo) => !x.done)
-          .map((item: Todo) => (
-            <li key={item.id}>
-              <span>{item.discription}</span>
-              <button onClick={() => makeDoneTodo(item)}>Zrobione!</button>
-              <button onClick={() => deleteTodo(item)}>Usuń</button>
-            </li>
-          ))}
-      </ul>
-      <p>
-        <span>Zadania zrobione:</span>
-        <ul>
-          {AppState.todoList
-            .filter((x: Todo) => x.done)
-            .map((item: Todo) => (
-              <li key={item.id}>
-                <span>
-                  {item.discription}, wykonano: {item.doneDate}
-                </span>
-                <button onClick={() => deleteTodo(item)}>Usuń</button>
-              </li>
-            ))}
-        </ul>
-      </p>
-    </div>
+      <div className="App">
+        <Form />
+        <br />
+        <TodoList />
+      </div>
   );
 };
+
 
 export default App;

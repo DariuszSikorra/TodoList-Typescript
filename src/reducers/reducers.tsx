@@ -1,7 +1,7 @@
 import { AppState, Action } from "../types/types";
 import { today, initialTodoForm } from "../initials/initials";
 
-export function reducer(state: AppState, action: Action): AppState {
+export const reducer = (state: AppState, action: Action) => {
   switch (action.type) {
     case "RESET":
       return action.payload

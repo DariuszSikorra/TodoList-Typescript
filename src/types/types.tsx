@@ -20,3 +20,9 @@ export type Action =
     | { type: "ADD_DEADLINE"; payload: string }
     | { type: "DELETE_TODO"; payload: Todo }
     | { type: "MAKEDONE_TODO"; payload: Todo };
+
+export type Dispatch = (action: Action) => void;
+
+export type AppProviderProps = {
+    children: React.ReactNode;
+};
