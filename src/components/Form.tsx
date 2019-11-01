@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useAppState, useAppDispatch} from "../context/context"
+import { useAppState, useAppDispatch } from "../context/context";
 
 const Form = () => {
   const AppState = useAppState();
@@ -15,11 +15,11 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Todo-Lista</h1>
+      <h1>Todo-List</h1>
       <div>
-        <span>Dodaj zadanie</span>
+        <span>Make new todo:</span>
         <br />
-        <span>Podaj opis zadania: </span>
+        <span>Fill out the task description: </span>
         <input
           type="text"
           placeholder="Discription..."
@@ -34,7 +34,7 @@ const Form = () => {
         />
       </div>
       <div>
-        <span>Podaj deadline: </span>
+        <span>Deadline date: </span>
         <input
           type="date"
           value={AppState.todoForm.deadline}
@@ -47,7 +47,7 @@ const Form = () => {
         />
       </div>
       <div>
-        <span>Priorytet: </span>
+        <span>Priority: </span>
         <input
           type="checkbox"
           checked={AppState.todoForm.important}
@@ -59,9 +59,9 @@ const Form = () => {
           }
         />
       </div>
-      <button type="submit">Dodaj</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };
 
-export default Form
+export default Form;

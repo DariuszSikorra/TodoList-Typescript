@@ -16,28 +16,37 @@ const TodoList = () => {
 
   return (
     <>
-      <p>Lista zadań do zrobienia:</p>
+      <p>Tasks to do:</p>
       <ul>
         {AppState.todoList
-          .filter((x: Todo) => !x.done)
-          .map((item: Todo) => (
+          .filter(x => !x.done)
+          .sort((a, b) => b.id - a.id)
+          .map(item => (
             <li key={item.id}>
               <span style={item.important ? { color: "red" } : undefined}>
-                {item.discription}{" "}
+                {item.discription}, deadline: {item.deadline}
               </span>
               <button onClick={() => makeDoneTodo(item)}>Zrobione!</button>
               <button onClick={() => deleteTodo(item)}>Usuń</button>
             </li>
           ))}
       </ul>
-      <p>Zadania zrobione:</p>
+      <p>Tasks completed:</p>
+      {AppState.todoList.filter(x => x.done).length > 5 && (
+        <em>Only the last 5 tasks are displayed</em>
+      )}
       <ul>
         {AppState.todoList
-          .filter((x: Todo) => x.done)
-          .map((item: Todo) => (
+          .filter(x => x.done)
+          .sort(
+            (a, b) =>
+              new Date(b.doneDate).getTime() - new Date(a.doneDate).getTime()
+          )
+          .slice(0, 5)
+          .map(item => (
             <li key={item.id}>
               <span>
-                {item.discription}, wykonano: {item.doneDate}
+                {item.discription}, done: {item.doneDate}
               </span>
               <button onClick={() => deleteTodo(item)}>Usuń</button>
             </li>
