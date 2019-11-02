@@ -1,16 +1,17 @@
 import * as React from "react";
 import { initialState } from "../initials/initials";
 import { reducer, Todo, Action } from "../reducers/reducers";
+import { Dispatch } from "react";
 
 export type AppState = {
   todoForm: Todo;
   todoList: Array<Todo>;
 };
 
-export type Dispatch = (action: Action) => void;
-
 const AppStateContext = React.createContext<AppState | undefined>(undefined);
-const AppDispatchContext = React.createContext<Dispatch | undefined>(undefined);
+const AppDispatchContext = React.createContext<Dispatch<Action> | undefined>(
+  undefined
+);
 
 export type AppProviderProps = {
   children: React.ReactNode;

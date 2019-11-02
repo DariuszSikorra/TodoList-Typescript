@@ -1,39 +1,27 @@
-import React, { useEffect, useRef } from 'react';
-import { useAppState, useAppDispatch } from "./context/context";
+import React from "react";
+import { AppState, useAppState, useAppDispatch } from "./context/context";
 
-import Form from "./components/Form"
-import TodoList from "./components/TodoList"
+import Form from "./components/Form";
+import TodoList from "./components/TodoList";
 
 import "./App.css";
+import useStateInLocalStorage from "./hooks/useStateInLocalStorage";
 
 const App: React.FC = () => {
-  const AppState = useAppState();
   const dispatch = useAppDispatch();
-
-  const didRun = useRef(false);
-
-  useEffect(() => {
-    if (!didRun.current) {
-      const raw = localStorage.getItem("data");
-      if (raw) {
-        dispatch({ type: "RESET", payload: JSON.parse(raw) });
-        didRun.current = true;
-      }
-    }
+  useStateInLocalStorage({
+    state: useAppState(),
+    name: "data",
+    initializeFn: (state: AppState) =>
+      dispatch({ type: "RESET", payload: state })
   });
-
-  useEffect(() => {
-    localStorage.setItem("data", JSON.stringify(AppState));
-  }, [AppState]);
-
   return (
-      <div className="App">
-        <Form />
-        <br />
-        <TodoList />
-      </div>
+    <div className="App">
+      <Form />
+      <br />
+      <TodoList />
+    </div>
   );
 };
-
 
 export default App;
