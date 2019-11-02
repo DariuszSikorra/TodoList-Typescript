@@ -26,8 +26,8 @@ const TodoList = () => {
               <span style={item.important ? { color: "red" } : undefined}>
                 {item.description}, deadline: {item.deadline}
               </span>
-              <button onClick={() => makeDoneTodo(item)}>Zrobione!</button>
-              <button onClick={() => deleteTodo(item)}>Usuń</button>
+              <button onClick={() => makeDoneTodo(item)}>Done!</button>
+              <button onClick={() => deleteTodo(item)}>Delete</button>
             </li>
           ))}
       </ul>
@@ -48,7 +48,7 @@ const TodoList = () => {
               <span>
                 {item.description}, done: {item.doneDate}
               </span>
-              <button onClick={() => deleteTodo(item)}>Usuń</button>
+              <button onClick={() => deleteTodo(item)}>Delete</button>
             </li>
           ))}
       </ul>

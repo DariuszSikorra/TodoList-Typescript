@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useAppState, useAppDispatch } from "../context/context";
 
-const Form = () => {
+const Form: React.FC = () => {
   const AppState = useAppState();
   const dispatch = useAppDispatch();
 
