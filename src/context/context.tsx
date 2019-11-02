@@ -1,12 +1,24 @@
 import * as React from "react";
 import { initialState } from "../initials/initials";
-import { reducer } from "../reducers/reducers";
-import { AppState, Dispatch, AppProviderProps } from "../types/types";
+import { reducer, Todo, Action } from "../reducers/reducers";
+
+export type AppState = {
+  todoForm: Todo;
+  todoList: Array<Todo>;
+};
+
+export type Dispatch = (action: Action) => void;
 
 const AppStateContext = React.createContext<AppState | undefined>(undefined);
 const AppDispatchContext = React.createContext<Dispatch | undefined>(undefined);
 
-const AppProvider: React.SFC<AppProviderProps> = ({ children }: AppProviderProps) => {
+export type AppProviderProps = {
+  children: React.ReactNode;
+};
+
+const AppProvider: React.SFC<AppProviderProps> = ({
+  children
+}: AppProviderProps) => {
   const [AppState, dispatch] = React.useReducer(reducer, initialState);
   return (
     <AppStateContext.Provider value={AppState}>

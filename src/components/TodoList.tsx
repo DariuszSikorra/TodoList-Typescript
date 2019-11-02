@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppState, useAppDispatch } from "../context/context";
-import { Todo } from "../types/types";
+import { Todo } from "../reducers/reducers";
 
 const TodoList = () => {
   const AppState = useAppState();
@@ -24,7 +24,7 @@ const TodoList = () => {
           .map(item => (
             <li key={item.id}>
               <span style={item.important ? { color: "red" } : undefined}>
-                {item.discription}, deadline: {item.deadline}
+                {item.description}, deadline: {item.deadline}
               </span>
               <button onClick={() => makeDoneTodo(item)}>Zrobione!</button>
               <button onClick={() => deleteTodo(item)}>Usuń</button>
@@ -46,7 +46,7 @@ const TodoList = () => {
           .map(item => (
             <li key={item.id}>
               <span>
-                {item.discription}, done: {item.doneDate}
+                {item.description}, done: {item.doneDate}
               </span>
               <button onClick={() => deleteTodo(item)}>Usuń</button>
             </li>

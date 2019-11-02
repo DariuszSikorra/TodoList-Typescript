@@ -22,12 +22,12 @@ const Form = () => {
         <span>Fill out the task description: </span>
         <input
           type="text"
-          placeholder="Discription..."
-          value={AppState.todoForm.discription}
+          placeholder="description..."
+          value={AppState.todoForm.description}
           required
           onChange={e =>
             dispatch({
-              type: "ADD_DISCRIPTION",
+              type: "ADD_DESCRIPTION",
               payload: e.currentTarget.value
             })
           }
