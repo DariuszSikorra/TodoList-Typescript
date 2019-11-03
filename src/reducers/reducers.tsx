@@ -1,14 +1,32 @@
-import { AppState, Action } from "../types/types";
 import { today, initialTodoForm } from "../initials/initials";
+import { AppState } from "../context/context";
+
+export type Todo = {
+  id: number;
+  description: string;
+  deadline: string;
+  important: boolean;
+  done: boolean;
+  doneDate: string;
+};
+
+export type Action =
+  | { type: "RESET"; payload: AppState }
+  | { type: "ADD_DESCRIPTION"; payload: string }
+  | { type: "ADD_IMPORTANT"; payload: boolean }
+  | { type: "ADD_TODO"; payload: Todo }
+  | { type: "ADD_DEADLINE"; payload: string }
+  | { type: "DELETE_TODO"; payload: Todo }
+  | { type: "MAKEDONE_TODO"; payload: Todo };
 
 export const reducer = (state: AppState, action: Action) => {
   switch (action.type) {
     case "RESET":
-      return action.payload
-    case "ADD_DISCRIPTION":
+      return action.payload;
+    case "ADD_DESCRIPTION":
       return {
         ...state,
-        todoForm: { ...state.todoForm, discription: action.payload }
+        todoForm: { ...state.todoForm, description: action.payload }
       };
     case "ADD_DEADLINE":
       if (action.payload >= today) {
@@ -53,4 +71,4 @@ export const reducer = (state: AppState, action: Action) => {
     default:
       return state;
   }
-}
+};
